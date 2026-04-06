@@ -23,17 +23,16 @@ class TransaksiPOS(PajakPPN):
         self.totalakhir += harga * jumlah
     
     def tampilkan_struk(self):
-        print("==== STRUK PEMBAYARAN ====")
+        print()
+        print(f"==================================")
+        print(f"     STRUK PEMBAYARAN - {self.meja}     ")
+        print(f"==================================")
         print(f'Pelanggan: {self.pelanggan}')
-        print(f'Meja: {self.meja}')
         print("----------------------------")
-        print("")
         print("Daftar Pesanan:")
         for nama_menu, harga, jumlah in self.daftarpesanan:
             print(f"- {nama_menu}: Rp {harga} x {jumlah} = Rp {harga * jumlah}")
-        print("")
         print("----------------------------")
-        print("")
         print(f"Subtotal: Rp {self.subtotal}")
         print("----------------------------")
         print(f"Pajak PPN (10%): Rp {self.nilaipajak}")
@@ -43,6 +42,14 @@ class TransaksiPOS(PajakPPN):
     def proses_pembayaran(self):
         self.nilaipajak = self.subtotal * 0.1
         self.totalakhir = self.subtotal + self.nilaipajak
+
+        bayar = float(input("Masukkan jumlah pembayaran: Rp "))
+        if bayar < self.totalakhir:
+            print("Pembayaran tidak cukup. Silakan coba lagi.")
+            self.proses_pembayaran()
+        else:
+            kembalian = bayar - self.totalakhir
+            print(f"Kembalian: Rp {kembalian}")
 
 
 #MAIN PROGRAM
