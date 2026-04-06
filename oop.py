@@ -1,10 +1,9 @@
-class komponen_harga:
+class KomponenHarga:
     def __init__ (self, subtotal):
         self.subtotal = subtotal
         self.totalakhir = subtotal
 
-
-class PajakPPN(komponen_harga):
+class PajakPPN(KomponenHarga):
     def __init__ (self, subtotal):
         super().__init__(subtotal)
         self.nilaipajak = self.subtotal * 0.1
@@ -17,12 +16,12 @@ class TransaksiPOS(PajakPPN):
         self.meja = meja
         self.daftarpesanan = []
 
-    def tambah_pesanan(self, nama_menu, harga, jumlah):
+    def tambah_item(self, nama_menu, harga, jumlah):
         self.daftarpesanan.append((nama_menu, harga, jumlah))
         self.subtotal += harga * jumlah
         self.totalakhir += harga * jumlah
     
-    def tampilkan_struk(self):
+    def cetak_struk(self):
         print("==== STRUK PEMBAYARAN ====")
         print(f'Pelanggan: {self.pelanggan}')
         print(f'Meja: {self.meja}')
@@ -62,7 +61,7 @@ while True:
 
     harga = int(input("Masukkan harga menu: "))
     jumlah = int(input("Masukkan jumlah pesanan: "))
-    transaksi.tambah_pesanan(nama_menu, harga, jumlah)
+    transaksi.tambah_item(nama_menu, harga, jumlah)
 
 transaksi.proses_pembayaran()
-transaksi.tampilkan_struk()
+transaksi.cetak_struk()
