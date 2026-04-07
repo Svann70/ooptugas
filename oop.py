@@ -43,9 +43,17 @@ class TransaksiPOS(PajakPPN):
         print(f"Total Akhir               : Rp       {self.totalakhir}")
         print(f"=============================================")
     
-    def proses_pembayaran(self):
+     def proses_pembayaran(self):
         self.nilaipajak = self.subtotal * 0.1 # Float (sub total dan total akhr)
         self.totalakhir = self.subtotal + self.nilaipajak
+
+        bayar = float(input("Masukkan jumlah pembayaran: Rp "))
+        if bayar < self.totalakhir:
+            print("Pembayaran tidak cukup. Silakan coba lagi.")
+            self.proses_pembayaran()
+        else:
+            kembalian = bayar - self.totalakhir
+            print(f"Kembalian: Rp {kembalian}")
 
 
 #MAIN PROGRAM
