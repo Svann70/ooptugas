@@ -19,24 +19,28 @@ class TransaksiPOS(PajakPPN):
     def tambah_item(self, nama_menu, harga, jumlah):
         self.daftarpesanan.append((nama_menu, harga, jumlah))
         self.subtotal += harga * jumlah
-        self.totalakhir += harga * jumlah
     
     def cetak_struk(self):
         print()
-        print(f"==================================")
-        print(f"     STRUK PEMBAYARAN - {self.meja}     ")
-        print(f"==================================")
+        print(f"=============================================")
+        print(f"       STRUK PEMBAYARAN - MEJA {self.meja}   ")
+        print(f"=============================================")
         print(f'Pelanggan: {self.pelanggan}')
-        print("----------------------------")
+        print("----------------------------------------------")
+        print()
         print("Daftar Pesanan:")
+
         for nama_menu, harga, jumlah in self.daftarpesanan:
-            print(f"- {nama_menu}: Rp {harga} x {jumlah} = Rp {harga * jumlah}")
-        print("----------------------------")
-        print(f"Subtotal: Rp {self.subtotal}")
-        print("----------------------------")
-        print(f"Pajak PPN (10%): Rp {self.nilaipajak}")
-        print("----------------------------")
-        print(f"Total Akhir: Rp {self.totalakhir}")
+            total_item = harga * jumlah 
+            print(f"{nama_menu:<25} x {jumlah:>2}   Rp {total_item:>10,}")
+            
+        print("---------------------------------------------"   )
+        print(f"Subtotal                  : Rp       {self.subtotal}")
+        print("---------------------------------------------")
+        print(f"PPN (10%)                 : Rp       {self.nilaipajak}")
+        print("---------------------------------------------")
+        print(f"Total Akhir               : Rp       {self.totalakhir}")
+        print(f"=============================================")
     
     def proses_pembayaran(self):
         self.nilaipajak = self.subtotal * 0.1 # Float (sub total dan total akhr)
@@ -51,7 +55,7 @@ class TransaksiPOS(PajakPPN):
             print(f"Kembalian: Rp {kembalian}")
 
 
-#MAIN PROGRAM
+#MAIN
 
 print("=== OOP KASIR ===")
 
