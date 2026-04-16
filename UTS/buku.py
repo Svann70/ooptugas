@@ -1,7 +1,7 @@
 #SISTEM INFORMASI PERPUSTAKAAN
 
 class Buku:
-    def __init__(self, item_id, judul, penulis, status):
+    def __init__(self, item_id, judul, penulis):
         self.__item_id = item_id
         self.__judul = judul
         self.__penulis = penulis
@@ -36,7 +36,7 @@ class Buku:
     #denda
     def hitung_denda(self, hari_terlambat):
         if hari_terlambat > 0:
-            denda_per_hari = 5000
+            denda_per_hari = 2000
             total_denda = hari_terlambat * denda_per_hari
             return total_denda
         else:
