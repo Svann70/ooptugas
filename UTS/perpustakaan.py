@@ -1,3 +1,4 @@
+import datetime
 from buku import Buku
 
 class Perpustakaan(Buku):
@@ -40,4 +41,31 @@ class Perpustakaan(Buku):
             return False
         
         #konversi tanggal ke format datetime
+        DateFormat1 = datetime.datetime.strptime(tanggal_pinjam, "%Y-%m-%d")
+        DateFormat2 = datetime.datetime.strptime(tanggal_kembali, "%Y-%m-%d")
+
+        totalHari = (DateFormat2 - DateFormat1).days
+        batasHari = 7
+
+        print(f"[SUKSES] Berhasil mengembalikan : {katalog[item_id]['item'].get_judul()}")
+        if totalHari > batasHari:
+            denda = katalog[item_id]["item"].hitung_denda(totalHari - batasHari)
+            print(f"[INFO] Terlambat {totalHari - batasHari} hari. Total denda: Rp {denda}")
+        else:
+            print(f"[INFO] Dikembalikan tepat waktu. Tidak ada denda.")
         
+        katalog[item_id]["tersedia"] = True
+        return True
+    
+#dict obj 
+katalog_perpustakaan = {
+    "B01": {"item": Buku("B01", "Filosofi Teras", "Henry Manampiring"), "tersedia": True},
+    "B02": {"item": Buku("B02", "Laskar Pelangi", "Andrea Hirata"), "tersedia": True},
+    "B03": {"item": Buku("B03", "Bumi Manusia", "Pramoedya Ananta Toer"), "tersedia": True},
+    "B04": {"item": Buku("B04", "Negeri 5 Menara", "A. Fuadi"), "tersedia": True},
+    "B05": {"item": Buku("B05", "Cantik Itu Luka", "Eka Kurniawan"), "tersedia": True},
+    "B06": {"item": Buku("B06", "Pulang", "Leila S. Chudori"), "tersedia": True},
+    "B07": {"item": Buku("B07", "Hujan Bulan Juni", "Sapardi Djoko Damono"), "tersedia": True},
+    "B08": {"item": Buku("B08", "Garis Waktu", "Fiersa Besari"), "tersedia": True}
+}
+
