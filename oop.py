@@ -29,18 +29,14 @@ class TransaksiPOS(PajakPPN):
         print("----------------------------------------------")
         print()
         print("Daftar Pesanan:")
-
         for nama_menu, harga, jumlah in self.daftarpesanan:
-            total_item = harga * jumlah 
-            print(f"{nama_menu:<25} x {jumlah:>2}   Rp {total_item:>10,}")
-            
-        print("---------------------------------------------"   )
-        print(f"Subtotal                  : Rp       {self.subtotal}")
-        print("---------------------------------------------")
-        print(f"PPN (10%)                 : Rp       {self.nilaipajak}")
-        print("---------------------------------------------")
-        print(f"Total Akhir               : Rp       {self.totalakhir}")
-        print(f"=============================================")
+            print(f"- {nama_menu}: Rp {harga} x {jumlah} = Rp {harga * jumlah}")
+        print("----------------------------")
+        print(f"Subtotal: Rp {self.subtotal}")
+        print("----------------------------")
+        print(f"Pajak PPN (10%): Rp {self.nilaipajak}")
+        print("----------------------------")
+        print(f"Total Akhir: Rp {self.totalakhir}")
     
     def proses_pembayaran(self):
         self.nilaipajak = self.subtotal * 0.1 # Float (sub total dan total akhr)
@@ -64,6 +60,7 @@ meja = int(input("Masukkan nomor meja: "))
 transaksi = TransaksiPOS(nama, meja)
 
 while True:
+    print()
     print("----- INPUT PESANAN -----")
     nama_menu = input("Masukkan nama menu (atau 'selesai' untuk selesai): ")
 
